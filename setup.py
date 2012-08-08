@@ -1,0 +1,18 @@
+from distutils.core import setup   
+setup(name = 'artsys',
+	  packages = ['artsys',
+				  'artsys.common',
+	              'artsys.delegate',
+	              'artsys.ftp',
+	              'artsys.http',
+	              'artsys.nt',
+	              'artsys.object',
+	              'artsys.socket',
+	              'artsys.zip',
+	              ],
+#	  packages = find_packages('src'), 
+	  package_dir = {'' : 'src'},
+	  version = '1.0.2',
+	  description = 'the product of artwebs',
+	  author='artwebs',   
+     ) 
