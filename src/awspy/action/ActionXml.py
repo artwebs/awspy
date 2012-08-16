@@ -31,6 +31,19 @@ class ActionXml(Action):
     def getResult(self,args):
         self.initArgs(args);
         
+    def getInfo(self,data,items,args=None):
+        self.initArgs(args);
+        self.appendElement('count', str(data.size()));
+        rows=self.appendElement('data')
+        for i in range(0,data.size()):
+            content="";
+            for j in range(0,items.size()):
+                content+="【"+items.getvalue(num=j)+"】"+data.getvalue(i,items.getkey(j));     
+                if j is not items.size()-1:
+                    content+="\n";
+            self.appendElement("row", content, rows)
+        self.__root.appendChild(rows)
+        
     def init(self):
         impl = xml.dom.minidom.getDOMImplementation()
         self.__dom=impl.createDocument(None, "root", None)
