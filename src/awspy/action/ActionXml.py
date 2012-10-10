@@ -14,6 +14,7 @@ class ActionXml(Action):
         self.init();
         
     def getList(self,data,items,args=None):
+        self.appendAttribute("type", "list")
         args.put('count',str(data.size()))
         self.initArgs(args);
         rows=self.appendElement('list')
@@ -29,6 +30,7 @@ class ActionXml(Action):
         self.__root.appendChild(rows)
         
     def getPageList(self,data,items,args=None):
+        self.appendAttribute('type', 'pagelist')
         rowsCount=data.getvalue(key='rowsCount')
         rowsData=data.getvalue(key="rows")
         args.put('count',str(rowsCount))
@@ -50,21 +52,22 @@ class ActionXml(Action):
         self.initArgs(args);
         
     def getInfo(self,data,items,args=None):
+        self.appendAttribute('type', 'info')
+        args.put('count',str(data.size()))
         self.initArgs(args);
-        self.appendElement('count', str(data.size()));
-        rows=self.appendElement('data')
+        rows=self.appendElement('list')
         for i in range(0,data.size()):
             content="";
             for j in range(0,items.size()):
                 content+="【"+items.getvalue(num=j)+"】"+data.getvalue(i,items.getkey(j));     
                 if j is not items.size()-1:
                     content+="\n";
-            self.appendElement("row", content, rows)
+            self.appendElement("item", content, rows)
         self.__root.appendChild(rows)
         
     def init(self):
         impl = xml.dom.minidom.getDOMImplementation()
-        self.__dom=impl.createDocument(None, "root", None)
+        self.__dom=impl.createDocument(None, "doc", None)
         self.__root=self.__dom.documentElement
         
     def initArgs(self,args):
@@ -94,5 +97,12 @@ class ActionXml(Action):
         else:
             parent.appendChild(element);
         return element;
+    
+    def appendAttribute(self,key,value,element=None):
+        if element is not None:
+            element.setAttribute(key, value)
+        else:
+            self.__root.setAttribute(key, value)
+    
     def reponse(self):
         return self.__dom.toxml('utf-8');
