@@ -1,4 +1,4 @@
-#coding=utf-8
+# -*- coding: utf-8 -*-
 import re
 from awspy.object.BinMap import BinMap 
 from awspy.object.BinList import BinList 
@@ -16,9 +16,9 @@ class ActionXml(Action):
     def getList(self,data,items,args=None):
         self.initArgs(args);
         self.appendElement('count', str(data.size()));
-        rows=self.appendElement('data')
+        rows=self.appendElement('list')
         for i in range(0,data.size()):
-            row=self.appendElement('row')
+            row=self.appendElement('item')
             for j in range(0,items.size()):
                 yitem=str(items.getvalue(num=j))   
                 p = re.compile(r'\[(\w+)\]')
