@@ -23,6 +23,7 @@ class Db(object):
         pass
     
     def runExecute(self,sql):
+        print sql
         rs=False
         self.getCursor()
         self.cursor.execute(sql)
@@ -34,6 +35,7 @@ class Db(object):
         return rs
     
     def getQuery(self,sql):
+        print sql
         self.getCursor()
         self.cursor.execute(sql) 
         rs = self.cursor.fetchall() 

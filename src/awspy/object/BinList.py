@@ -12,7 +12,7 @@ class BinList(object):
 
 
     def __init__(self):
-        pass
+        self.__list=[]
         
     def put(self,num,key,value,flag=True):
         if num is not None:

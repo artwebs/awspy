@@ -14,8 +14,8 @@ class ActionXml(Action):
         self.init();
         
     def getList(self,data,items,args=None):
+        args.put('count',str(data.size()))
         self.initArgs(args);
-        self.appendElement('count', str(data.size()));
         rows=self.appendElement('list')
         for i in range(0,data.size()):
             row=self.appendElement('item')
@@ -27,6 +27,24 @@ class ActionXml(Action):
                 self.appendElement(items.getkey(num=j),yitem,row)           
             rows.appendChild(row)
         self.__root.appendChild(rows)
+        
+    def getPageList(self,data,items,args=None):
+        rowsCount=data.getvalue(key='rowsCount')
+        rowsData=data.getvalue(key="rows")
+        args.put('count',str(rowsCount))
+        self.initArgs(args);
+        rows=self.appendElement('list')
+        for i in range(0,rowsData.size()):
+            row=self.appendElement('item')
+            for j in range(0,items.size()):
+                yitem=str(items.getvalue(num=j))   
+                p = re.compile(r'\[(\w+)\]')
+                for m in p.finditer(yitem):
+                    yitem=yitem.replace(str(m.group()),str(rowsData.getvalue(i,str(m.group(1)))))                
+                self.appendElement(items.getkey(num=j),yitem,row)           
+            rows.appendChild(row)
+        self.__root.appendChild(rows)
+        
         
     def getResult(self,args):
         self.initArgs(args);
@@ -52,7 +70,7 @@ class ActionXml(Action):
     def initArgs(self,args):
         self.__args=args;
         if self.__args is None:
-            self.__args=BinMap();
+            self.__args=BinMap()
             self.__args.put('code', '1');
             self.__args.put('message', '数据下载成功');
         else:
@@ -60,6 +78,8 @@ class ActionXml(Action):
                 self.__args.put('code', '1');
             if not self.__args.isexists('message'):
                 self.__args.put('message', '数据下载成功');
+            if not self.__args.isexists('count'):
+                self.__args.put('count', '0');
         
         for i in range(0,self.__args.size()):
             self.appendElement(self.__args.getkey(i), self.__args.getvalue(num=i))
