@@ -58,22 +58,38 @@ class test(SocketServer):
         try:
             while 1:       
                 meg=self.revmessage()
-#                print meg
+                print meg
 #                http_parse_query(meg)
 #                meg=meg.replace("\r\n","")
-                if(meg=="end"):
-                    self.closeconn()  
-                else:      
-                    if meg=="1" :
-                        self.sendmessage('welcome to server!')
-                        self.closeconn()
-                    else:
-                        self.sendmessage("11111")
-                        self.closeconn()
+#                if(meg=="end"):
+#                    self.closeconn()  
+#                else:      
+#                    if meg=="1" :
+#                        self.sendmessage('welcome to server!')
+#                        self.closeconn()
+#                    else:
+#                        self.sendmessage("11111")
+#                        self.closeconn()
+                input = open("D:\\temp\\movices_tpl\\2121.264",'rb')
+                i=0
+                sum=0
+                while True:
+                    meg=self.revmessage()
+                    print meg
+                    chunk = input.read(2048)
+                    if not chunk:
+                        break
+                    sum+=len(chunk);
+#                    print "len="+str(sum)
+                    i=(i+1)
+#                    print "i="+str(i)
+                    self.sendmessage(chunk)
+                self.closeconn()
                         
                     
-        except:
-            self.closeconn()           
+        except Exception,e:
+            self.closeconn() 
+            print e          
         #self.closeconn()
         
          
@@ -83,7 +99,7 @@ class test(SocketServer):
 
                          
 if __name__ == '__main__': 
-    t=test(8001)
+    t=test(3456,host='0.0.0.0',time_out=1000)
     t.start()
 
         
