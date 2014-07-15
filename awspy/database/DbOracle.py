@@ -3,7 +3,7 @@ Created on 2010-11-10
 
 @author: Administrator
 '''
-from artsys.object.LHBMap import LHBMap
+from awspy.object.LHBMap import LHBMap
 import cx_Oracle
 from awspy.database import DbModel, Db
 

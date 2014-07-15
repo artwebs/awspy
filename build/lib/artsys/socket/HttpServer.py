@@ -1,7 +1,7 @@
 import re
-from artsys.object.LHBMap import LHBMap
-from artsys.socket.SocketServer import *
-from artsys.common.Method import *
+from awspy.object.LHBMap import LHBMap
+from awspy.socket.SocketServer import *
+from awspy.common.Method import *
 class HttpServer(SocketServer):
     httpMap=None
     queryMap=None

@@ -8,8 +8,8 @@ import string
 import time
 import os
 
-#from artsys.http.HttpClient import HttpClient
-from artsys.object.LHBMap import LHBMap
+#from awspy.http.HttpClient import HttpClient
+from awspy.object.LHBMap import LHBMap
 
 '''
 ·þÎñÆ÷¼ì²â

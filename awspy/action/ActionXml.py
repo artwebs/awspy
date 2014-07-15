@@ -22,11 +22,11 @@ class ActionXml(Action):
         for i in range(0,data.size()):
             row=self.appendElement('item')
             for j in range(0,items.size()):
-                yitem=str(items.getvalue(num=j))   
+                yitem=str(items.getvalue(num=j))
                 p = re.compile(r'\[(\w+)\]')
                 for m in p.finditer(yitem):
-                    yitem=yitem.replace(str(m.group()),str(data.getvalue(i,str(m.group(1)))))                
-                self.appendElement(items.getkey(num=j),yitem,row)           
+                    yitem=yitem.replace(str(m.group()),str(data.getvalue(i,str(m.group(1)))))
+                self.appendElement(items.getkey(num=j),yitem,row)
             rows.appendChild(row)
         self.__root.appendChild(rows)
         

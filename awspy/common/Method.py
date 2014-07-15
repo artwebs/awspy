@@ -8,7 +8,7 @@ import string
 import time
 import os
 
-#from artsys.http.HttpClient import HttpClient
+#from awspy.http.HttpClient import HttpClient
 from awspy.object.BinMap import BinMap
 
 '''
