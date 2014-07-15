@@ -1,7 +1,8 @@
 #coding=utf-8
 import re
 
-from awspy.object import BinMap
+from awspy.object.BinMap import BinMap
+from awspy.action.Action import Action
 
 
 class ActionJson(Action):

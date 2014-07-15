@@ -5,7 +5,7 @@ Created on 2010-11-9
 '''
 import re
 
-from awspy.object import BinMap
+from awspy.object.BinMap import BinMap
 from awspy.object.BinList import BinList
 
 

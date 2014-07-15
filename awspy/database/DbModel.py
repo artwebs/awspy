@@ -4,7 +4,8 @@ Created on 2010-11-9
 @author: Administrator
 '''
 #from DbOracle import DbOracle
-from awspy.database import Db, DbUtil
+from awspy.database.Db import Db
+from awspy.database.DbUtil import DbUtil
 
 
 class DbModel(Db):

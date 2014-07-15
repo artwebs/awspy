@@ -1,7 +1,7 @@
 #coding=utf-8
 import sqlite3
 
-from awspy.database import DbModel
+from awspy.database.DbModel import DbModel
 from awspy.database.Db import Db
 
 
