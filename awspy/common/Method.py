@@ -1,4 +1,4 @@
-# -*- coding:gbk -*- 
+# -*- coding:utf-8 -*-
 import subprocess    
 import re,sys
 import socket
@@ -9,10 +9,10 @@ import time
 import os
 
 #from artsys.http.HttpClient import HttpClient
-from artsys.object.LHBMap import LHBMap
+from awspy.object.BinMap import BinMap
 
 '''
-·şÎñÆ÷¼ì²â
+æœåŠ¡å™¨æ£€æµ‹
 '''
 def detectHost(host):
     rs="-1"
@@ -31,7 +31,7 @@ def detectHost(host):
     
     
 '''
-¶Ë¿Ú¼ì²â
+ç«¯å£æ£€æµ‹
 '''
 def detectPort(host,port=80,timeout=30):
     sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -130,7 +130,7 @@ def readfile(filename):
 '''
 
 '''
-def console_log(txt,path="d:/palmlink/pylog",filetop="",code='gbk'):
+def console_log(txt,path="d:/palmlink/pylog",filetop="",code='utf-8'):
     try:
         txt=(txt.decode(code)).encode('utf8')
     except:
@@ -148,7 +148,7 @@ def console_log(txt,path="d:/palmlink/pylog",filetop="",code='gbk'):
 
 def test():
 #    u=HttpClient()
-#    s="ï¿½Ğ¹ï¿½"
+#    s="é”Ÿå«ç™¸æ‹·"
 #    print sys.getdefaultencoding()
 #    a=urlencode(s);
 #    print urldecode(a)
@@ -159,7 +159,7 @@ def test():
 #    print rs[2]
 #    print rs
 #    print readfile("d:\\temp\\test\\SMSOUT00000000004125.txt")
-    console_log('ºÃµÄ',path="d:/palmlink/pylog")
+    console_log('å¥½çš„',path="/data/temp/log.txt")
 
 
 if __name__=="__main__":
