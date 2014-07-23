@@ -39,3 +39,13 @@ if __name__=="__main__":
     print(rs)
     print(text)
     print (obj.decode(rs,key,iv))
+
+
+    key="www.zcline.net"
+    iv="\0\0\0\0\0\0\0\0"
+    text="1103010900000013"
+    rs=obj.encode(text,key,iv)
+    print("ysedRi2FrlST+cQsk2DD4DphLQcvzpT6")
+    print(rs)
+    print(text)
+    print (obj.decode(rs,key,iv))

@@ -3,31 +3,31 @@ __author__ = 'artwebs'
 
 import string
 import struct
-from Crypto import Random
+import random
 
 class Security(object):
      mode=None
      keysize=None
      blocksize=None
 
-     def __init__(self,mod,ksize,bsize):
+     def __init__(self,mod=None,ksize=None,bsize=None):
          self.mode=mod
          self.keysize=ksize
          self.blocksize=bsize
 
-     def getKey(self,key,ksize):
-        rs=[0]*ksize
+     def getKey(self,key):
+        rs=[0]*self.keysize
         num=0
-        for i in range(ksize):
+        for i in range(self.keysize):
             if num>=len(key):
                 num=0
             rs[i]=key[num]
             num+=1
         return ''.join(rs)
-     def getIV(self,iv,bsize):
-         rs=[0]*bsize
+     def getIV(self,iv):
+         rs=[0]*self.blocksize
          num=0
-         for i in range(bsize):
+         for i in range(self.blocksize):
              if num>=len(iv):
                  num=0
              rs[i]=iv[num]
@@ -58,8 +58,8 @@ class Security(object):
 
 
 
-     def randomBytes(self,bsize):
-        return Random.new().read(bsize)
+     def randomBytes(self,size):
+        return "".join(random.sample('zyxwvutsrqponmlkjihgfedcba1234567890!@#$%^&*()',size))
 
 
      def  generateSecretKey(self):
