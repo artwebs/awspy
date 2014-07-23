@@ -8,7 +8,7 @@ from awspy.common.Method import *
 from awspy.security.Security import *
 
 
-class DESUtils(Security):
+class ArtSecurity3DES(Security):
     def encode(self,source,key,iv):
         key=self.getKey(key)
         cipher = DES3.new(key,DES3.MODE_CBC,self.getIV(iv))
@@ -44,7 +44,7 @@ class DESUtils(Security):
 
 
 if __name__=="__main__":
-    obj=DESUtils()
+    obj=ArtSecurity3DES()
     print("generateSecretKey:",str(obj.generateSecretKey()).encode('hex'))
     print("randomIVBytes:",str(obj.randomIVBytes()).encode('hex'))
     key="www.zcline.net"

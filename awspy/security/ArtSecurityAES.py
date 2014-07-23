@@ -7,7 +7,7 @@ from struct import *
 import base64
 from awspy.security.Security import *
 
-class  AESUtils(Security):
+class  ArtSecurityAES(Security):
     def encode(self,key,source):
         key=self.getKey(key)
         iv = Random.new().read(AES.block_size)
@@ -25,7 +25,7 @@ class  AESUtils(Security):
 
 
 if __name__=="__main__":
-    obj=AESUtils()
+    obj=ArtSecurityAES()
     rs=obj.encode("www.zcline.net","1103010900000013")
     print rs
     print obj.decode("www.zcline.net",rs)
