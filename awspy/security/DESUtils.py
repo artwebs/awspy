@@ -23,7 +23,18 @@ class DESUtils(Security):
         return msg
 
     def  generateSecretKey(self):
-        return Random.new.read(DES3.MODE_CBC)
+        import random
+        import struct
+        import hashlib
+        seeds = random.random()
+        m = hashlib.md5()
+        m.update(str(seeds))
+        ret1 = m.digest()
+        seeds = random.random()
+        m.update(str(seeds))
+        ret2 = m.digest()
+        ret = struct.pack("%ds%ds"%(len(ret1),len(ret2)),ret1,ret2)
+        return ret
 
     def randomIVBytes(self):
         return Random.new().read(DES3.block_size)
@@ -34,13 +45,13 @@ class DESUtils(Security):
 
 if __name__=="__main__":
     obj=DESUtils()
+    print("generateSecretKey:",str(obj.generateSecretKey()).encode('hex'))
+    print("randomIVBytes:",str(obj.randomIVBytes()).encode('hex'))
     key="www.zcline.net"
     iv="artwebs"
-    text="1103010900000013"
+    text="a12*&1c中文"
     rs=obj.encode(text,key,iv)
+    print("ts7JDFmRRIX8vIpfOc6s6A==")
     print(rs)
-    print obj.decode(rs,key,iv)
-    print obj.decode("bXgKYTR47dosKznX/32ARzoeuuBsdfIn",key,iv)
-    print obj.decode("bXgKYTR47dosKznX/32ARw==",key,iv)
-
-    print(base64.decodestring("RzoeuuBsdfIn"))
+    print(text)
+    print (obj.decode(rs,key,iv))
