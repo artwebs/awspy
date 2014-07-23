@@ -9,38 +9,22 @@ from awspy.security.Security import *
 
 
 class ArtSecurity3DES(Security):
+
+    def __init__(self):
+        Security.__init__(self,DES3.MODE_CBC,DES3.key_size[1],DES3.block_size)
+
     def encode(self,source,key,iv):
-        key=self.getKey(key)
-        cipher = DES3.new(key,DES3.MODE_CBC,self.getIV(iv))
-        msg = cipher.encrypt(self.appendPadding(DES3.block_size,source))
+        key=self.getKey(key,self.keysize)
+        cipher = DES3.new(key,self.mode,self.getIV(iv,self.blocksize))
+        msg = cipher.encrypt(self.appendPadding(self.blocksize,source))
         msg=base64.encodestring(msg)
         return msg
     def decode(self,source,key,iv):
-        key =self.getKey(key)
+        key =self.getKey(key,self.keysize)
         source=base64.decodestring(source)
-        cipher = DES3.new(key, DES3.MODE_CBC,self.getIV(iv))
+        cipher = DES3.new(key, self.mode,self.getIV(iv,self.blocksize))
         msg =cipher.decrypt(source)
         return msg
-
-    def  generateSecretKey(self):
-        import random
-        import struct
-        import hashlib
-        seeds = random.random()
-        m = hashlib.md5()
-        m.update(str(seeds))
-        ret1 = m.digest()
-        seeds = random.random()
-        m.update(str(seeds))
-        ret2 = m.digest()
-        ret = struct.pack("%ds%ds"%(len(ret1),len(ret2)),ret1,ret2)
-        return ret
-
-    def randomIVBytes(self):
-        return Random.new().read(DES3.block_size)
-
-
-
 
 
 if __name__=="__main__":
