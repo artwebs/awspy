@@ -6,12 +6,10 @@ import struct
 import random
 
 class Security(object):
-     mode=None
      keysize=None
      blocksize=None
 
-     def __init__(self,mod=None,ksize=None,bsize=None):
-         self.mode=mod
+     def __init__(self,ksize=None,bsize=None):
          self.keysize=ksize
          self.blocksize=bsize
 
