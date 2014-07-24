@@ -54,11 +54,8 @@ class Security(object):
             raise NameError('invalid padding')
         return s[:-n]
 
-
-
      def randomBytes(self,size):
         return "".join(random.sample('zyxwvutsrqponmlkjihgfedcba1234567890!@#$%^&*()',size))
-
 
      def  generateSecretKey(self):
         return self.randomBytes(self.keysize)
