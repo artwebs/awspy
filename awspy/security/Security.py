@@ -55,7 +55,7 @@ class Security(object):
         return s[:-n]
 
      def randomBytes(self,size):
-        return "".join(random.sample('zyxwvutsrqponmlkjihgfedcba1234567890!@#$%^&*()',size))
+        return "".join(random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/!@#$%^&*()',size))
 
      def  generateSecretKey(self):
         return self.randomBytes(self.keysize)
