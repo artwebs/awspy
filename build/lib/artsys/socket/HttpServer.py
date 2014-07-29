@@ -1,7 +1,7 @@
 import re
 from awspy.object.LHBMap import LHBMap
 from awspy.socket.SocketServer import *
-from awspy.common.Method import *
+from awspy.utils.Utils import *
 class HttpServer(SocketServer):
     httpMap=None
     queryMap=None
