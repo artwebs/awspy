@@ -617,7 +617,7 @@ class PassiveDTP(asyncore.dispatcher):
                 # http://en.wikipedia.org/wiki/IPv6#IPv4-mapped_addresses
                 # http://tools.ietf.org/html/rfc3493.html#section-3.7
                 # We truncate the first bytes to make it look like a
-                # common IPv4 address.
+                # utils IPv4 address.
                 ip = ip[7:]
             # The format of 227 response in not standardized.
             # This is the most expected:
@@ -2213,7 +2213,7 @@ class FTPHandler(asynchat.async_chat):
             # http://en.wikipedia.org/wiki/IPv6#IPv4-mapped_addresses
             # http://tools.ietf.org/html/rfc3493.html#section-3.7
             # We truncate the first bytes to make it look like a
-            # common IPv4 address.
+            # utils IPv4 address.
             remote_ip = remote_ip[7:]
         if not self.permit_foreign_addresses and ip != remote_ip:
             self.log("Rejected data connection to foreign address %s:%s."

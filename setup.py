@@ -1,7 +1,7 @@
 from distutils.core import setup   
 setup(name = 'awspy',
 	  packages = ['awspy',
-				  'awspy.common',
+				  'awspy.utils',
 	              'awspy.delegate',
 	              'awspy.ftp',
 	              'awspy.http',

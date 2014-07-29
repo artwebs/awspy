@@ -9,7 +9,6 @@ class Action(object):
     classdocs
     '''
 
-
     def __init__(self):
         '''
         Constructor

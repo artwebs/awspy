@@ -6,7 +6,7 @@ Created on 2010-10-26
 '''
 
 from urlparse import urlparse
-from awspy.common.Method import *
+from awspy.utils.Utils import *
 import httplib, urllib
 import re
 
