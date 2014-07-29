@@ -12,7 +12,7 @@ setup(name = 'awspy',
 	              ],
 #	  packages = find_packages('src'), 
 	  package_dir = {'' : 'src'},
-	  version = '1.0.2',
+	  version = '1.0.3',
 	  description = 'the product of artwebs',
 	  author='artwebs',   
      ) 

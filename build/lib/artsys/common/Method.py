@@ -1,15 +1,15 @@
 # -*- coding:gbk -*- 
-import subprocess    
-import re,sys
+import subprocess
+import re
+import sys
 import socket
 import urllib
-import base64
-import string
 import time
 import os
 
+
 #from awspy.http.HttpClient import HttpClient
-from awspy.object.LHBMap import LHBMap
+from src.awspy.object.LHBMap import LHBMap
 
 '''
 服务器检测

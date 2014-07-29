@@ -6,9 +6,12 @@ Created on 2010-10-26
 '''
 
 from urlparse import urlparse
-from awspy.utils.Utils import *
-import httplib, urllib
+import httplib
+import urllib
 import re
+
+from src.awspy.utils.Utils import *
+
 
 class HttpClient(object):
     '''

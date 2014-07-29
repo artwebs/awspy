@@ -4,7 +4,10 @@ Created on 2010-10-24
 @author: Administrator
 '''
 import os
-from awspy.ftp.pyftpdlib import DummyAuthorizer, FTPServer, FTPHandler, __ver__
+
+from src.awspy.ftp.pyftpdlib import DummyAuthorizer, FTPServer, FTPHandler, __ver__
+
+
 class FtpServer:
     __host="localhost"
     __port=21
