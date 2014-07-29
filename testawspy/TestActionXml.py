@@ -1,7 +1,7 @@
 #coding=utf-8
 import unittest
 
-from src.awspy.action.ActionXml import *
+from awspy.action.ActionXml import *
 from awspy.object.BinMap import *
 from awspy.object.BinList import *
 

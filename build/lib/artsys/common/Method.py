@@ -9,7 +9,7 @@ import os
 
 
 #from awspy.http.HttpClient import HttpClient
-from src.awspy.object.LHBMap import LHBMap
+from awspy.object.LHBMap import LHBMap
 
 '''
 ·þÎñÆ÷¼ì²â

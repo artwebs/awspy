@@ -7,10 +7,8 @@ Created on 2010-10-26
 
 from urlparse import urlparse
 import httplib
-import urllib
-import re
 
-from src.awspy.utils.Utils import *
+from awspy.utils.Utils import *
 
 
 class HttpClient(object):

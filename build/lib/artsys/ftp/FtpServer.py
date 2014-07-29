@@ -5,7 +5,7 @@ Created on 2010-10-24
 '''
 import os
 
-from src.awspy.ftp.pyftpdlib import DummyAuthorizer, FTPServer, FTPHandler, __ver__
+from awspy.ftp.pyftpdlib import DummyAuthorizer, FTPServer, FTPHandler, __ver__
 
 
 class FtpServer:
