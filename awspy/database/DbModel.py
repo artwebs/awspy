@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 2010-11-9
 
 @author: Administrator
 '''
 #from DbOracle import DbOracle
-from awspy.database import Db, DbUtil
+from awspy.database.DbUtil import DbUtil
+from awspy.database.Db import Db
 
 
 class DbModel(Db):
@@ -17,6 +19,9 @@ class DbModel(Db):
 
     def __init__(self,tablename=None):
         if tablename is not None: self.__tablename=tablename
+
+    def __init__(self,connstr=None,host=None,user=None,passwd=None,db=None,port=None):
+        Db.__init__(self,connstr,host,user,passwd,db,port)
         
     def getSelectResult(self,fvs=None,where=None,tableName=None):
         fvpart="*";
