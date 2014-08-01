@@ -28,6 +28,7 @@ class PgModel(DbModel):
         self.cursor = self.conn.cursor()
 
 if __name__=="__main__":
+    import json
     db=PgModel(host='127.0.0.1', user='postgres',passwd='windows123',db='awsweb')
     f= BinMap();
     # f.put("login_name","")
@@ -35,11 +36,15 @@ if __name__=="__main__":
     # print (db.getSelectResult(f,'1=1','pu_user')).getitem()
 
     # f.clear()
-    f.put("v_json","")
-    f.put("v_code","")
-    f.put("v_message","")
-    rs=db.getSelectResult(f,'1=1','validate_user(\'admin\',\' v_pwd\',null,null,\'web\')')
-    print rs.getitem()
+    # f.put("v_json","")
+    # f.put("v_code","")
+    # f.put("v_message","")
+    # rs=db.getSelectResult(f,'1=1','validate_user(\'admin\',\' v_pwd\',null,null,\'web\')')
+    # print rs.getitem()
+
+    f.put("ojson","")
+    rs=db.getSelectResult(f,'1=1','aws_entrance(\'validate_user\',\'admin\')')
+    print json.loads(rs.getvalue(0,"ojson"))
 
     # db.getCursor()
     #
