@@ -35,20 +35,24 @@ if __name__=="__main__":
     # print (db.getSelectResult(f,'1=1','pu_user')).getitem()
 
     # f.clear()
-    # f.put("v_code","")
-    # f.put("v_message","")
-    # rs=db.getSelectResult(f,'1=1','validate_user(\'admin\',\' v_pwd\',null,null,\'web\',\'_ref\')')
-    # print rs.getvalue(0,"v_message")
+    f.put("v_json","")
+    f.put("v_code","")
+    f.put("v_message","")
+    rs=db.getSelectResult(f,'1=1','validate_user(\'admin\',\' v_pwd\',null,null,\'web\')')
+    print rs.getitem()
 
-    db.getCursor()
+    # db.getCursor()
+    #
+    # db.conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
+    # db.cursor.callproc("validate_user", ['admin',' v_pwd',None,None,'web'])
+    # print db.cursor.fetchone()
+    # db.cursor.execute ( "fetch", [ "_ref" ] ) # fetch row from this cursor
+    # db.cursor.fetchone()
+    # # cur2 = db.cursor()
+    # print cur2.fetchone()
+    # db.closeCursor()
 
-    db.conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_AUTOCOMMIT)
-    cur=None
-    db.cursor.callproc("validate_user", ['admin',' v_pwd',None,None,'web',cur])
-    # print db.cursor.fetchmany(2)
-    # cur2 = db.cursor()
-    for record in db.cursor:
-        for s in record[0]:
-            print  s
-    db.closeCursor()
-
+    # db.getCursor()
+    # db.cursor.callproc("reffunc", ['curname'])
+    # cur2 = db.conn.cursor('curname')
+    # print cur2.fetchone()
