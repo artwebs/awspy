@@ -4,6 +4,7 @@ __author__ = 'artwebs'
 import string
 import struct
 import random
+from awspy.utils.Utils import *
 
 class Security(object):
      keysize=None
@@ -54,11 +55,9 @@ class Security(object):
             raise NameError('invalid padding')
         return s[:-n]
 
-     def randomBytes(self,size):
-        return "".join(random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/!@#$%^&*()',size))
 
      def  generateSecretKey(self):
-        return self.randomBytes(self.keysize)
+        return randomBytes(self.keysize)
 
      def randomIVBytes(self):
-        return self.randomBytes(self.blocksize)
+        return randomBytes(self.blocksize)
