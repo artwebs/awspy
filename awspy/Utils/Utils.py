@@ -6,6 +6,8 @@ import socket
 import urllib
 import time
 import os
+import random
+from awspy.object.BinMap import BinMap
 
 
 #from awspy.http.HttpClient import HttpClient
@@ -62,7 +64,7 @@ def getsyscharset():
     return sys.getdefaultencoding()
 
 def http_parse_query(meg):
-    http=LHBMap();
+    http=BinMap();
     regex = re.compile("(GET|POST)\s+(.+?)\s+(.+?)\r\n", re.IGNORECASE)
     out=regex.findall(meg)
     if len(out)>0:
@@ -110,7 +112,7 @@ def http_queryobject(httpMap):
         
     regex = re.compile("&(\w+)=([^&]+)", re.IGNORECASE)
     out=regex.findall(querystring)
-    queryobject=LHBMap()
+    queryobject=BinMap()
     queryobject.clear()
     for i in range(len(out)):
         queryobject.put(out[i][0], out[i][1])
@@ -144,6 +146,9 @@ def console_log(txt,path="d:/palmlink/pylog",filetop="",code='utf-8'):
     fd.write(rs)
     fd.close()
     pass
+
+def randomBytes(size):
+    return "".join(random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/!@#$%^&*()',size))
 
 def test():
 #    u=HttpClient()
