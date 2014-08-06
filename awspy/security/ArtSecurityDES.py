@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
-from awspy.security import Security, pyDes
+from awspy.security.Security import Security
+from awspy.security import pyDes
 
 __author__ = 'artwebs'
 import base64
@@ -51,6 +52,7 @@ def __testTRIPLEDES():
     text="a12*&1c中文"
     rs=objECB.encode(text,key)
 
+    print 'DEC_ECB generateSecretKey:'+objECB.generateSecretKey()
     print("ts7JDFmRRIX8vIpfOc6s6A==")
     print(rs)
     print(text)
@@ -66,6 +68,7 @@ def __testTRIPLEDES():
 
 
     objEBC=ArtSecurityDES(mod=CBC)
+    print 'DEC_CBC generateSecretKey:'+objEBC.generateSecretKey()
     key="www.zcline.net"
     text="a12*&1c中文"
     iv="artwebs"
@@ -109,6 +112,7 @@ def __testDES():
     text="a12*&1c中文"
     iv="artwebs"
     rs=objEBC.encode(text,key,iv)
+
     print("ts7JDFmRRIX8vIpfOc6s6A==")
     print(rs)
     print(text)
