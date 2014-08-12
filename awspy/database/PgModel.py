@@ -27,6 +27,8 @@ class PgModel(DbModel):
             self.conn= psycopg2.connect(host=self.host,user=self.user,password=self.passwd,database=self.db,port=5432)
         self.cursor = self.conn.cursor()
 
+
+
 if __name__=="__main__":
     import json
     db=PgModel(host='127.0.0.1', user='postgres',passwd='windows123',db='awsweb')
@@ -42,9 +44,9 @@ if __name__=="__main__":
     # rs=db.getSelectResult(f,'1=1','validate_user(\'admin\',\' v_pwd\',null,null,\'web\')')
     # print rs.getitem()
 
-    f.put("ojson","")
-    rs=db.getSelectResult(f,'1=1','aws_entrance(\'validate_user\',\'admin\')')
-    print json.loads(rs.getvalue(0,"ojson"))
+    # f.put("ojson","")
+    # rs=db.getSelectResult(f,'1=1','aws_entrance(\'validate_user\',\'admin\')')
+    # print json.loads(rs.getvalue(0,"ojson"))
 
     # db.getCursor()
     #
@@ -61,3 +63,11 @@ if __name__=="__main__":
     # db.cursor.callproc("reffunc", ['curname'])
     # cur2 = db.conn.cursor('curname')
     # print cur2.fetchone()
+
+    # db.getCursor()
+    # db.cursor.callproc("aws_entrance", ['bcard_imgidentify_upload','{"rd": "1", "re": "2", "rf": "3", "ra": "4", "rb": "5", "rc": "6", "ri": "201408120326_0jpg"}'])
+    # db.conn.commit()
+    # print db.cursor.fetchall()[0][0]
+    f.put("ojson","")
+    rs=db.callproc("aws_entrance",['bcard_imgidentify_upload','{"rd": "1", "re": "2", "rf": "3", "ra": "4", "rb": "5", "rc": "6", "ri": "201408120326_0jpg"}'],f)
+    print rs.getitem()

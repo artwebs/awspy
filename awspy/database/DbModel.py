@@ -76,3 +76,13 @@ class DbModel(Db):
         if where is not None: sql+=" where "+where
         rs=self.__db.runExecute(sql)
         return rs
+
+
+    def callproc(self,procName,params,fvs=None):
+        self.getCursor()
+        self.cursor.callproc(procName,params)
+        rs = self.cursor.fetchall()
+        self.conn.commit()
+        self.closeCursor()
+        rs=self.__util.getSelectList(fvs,rs)
+        return rs
