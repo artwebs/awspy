@@ -79,7 +79,7 @@ class BinList(object):
 
                     
 def test():
-    list=LHBList()
+    list=BinList()
     list.put(0,"a","1");
     list.put(0,"b","2");    
     list.put(1,"c","3");
