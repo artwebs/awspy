@@ -69,6 +69,7 @@ def __testTRIPLEDES():
 
     objEBC=ArtSecurityDES(mod=CBC)
     print 'DEC_CBC generateSecretKey:'+objEBC.generateSecretKey()
+    print 'DEC_CBC generateSecretIV:'+objEBC.randomIVBytes()
     key="www.zcline.net"
     text="a12*&1c中文"
     iv="artwebs"
