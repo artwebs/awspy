@@ -127,9 +127,25 @@ def __testDES():
     print text
     print objEBC.decode(rs,key,iv)
 
+
+def __testRest():
+    objCBC=ArtSecurityDES(mod=CBC)
+    import json
+    key="Ge7F5zKUbj31pgMndAL8suNS"
+    text=json.dumps({"a":"刘洪彬","b":"云南卓诚科技有限公司"})
+    iv="Zalnh2c0"
+    rs=objCBC.encode(text,key,iv)
+
+    # print key
+    print rs
+    print objCBC.decode("M01BtXR0nzpi6ApRcZrl40D/oRJkTqVY8+KvuCq4AlSSh01A6hTRiXK+5F+JCQXKFBLvkzzb4Ps=",key,iv)
+    # print text
+    # print objCBC.decode(rs,key,iv)
+
 if __name__=="__main__":
-    __testTRIPLEDES()
-    __testDES()
+    # __testTRIPLEDES()
+    # __testDES()
+    __testRest()
 
 
 
