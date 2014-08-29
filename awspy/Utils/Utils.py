@@ -150,6 +150,24 @@ def console_log(txt,path="d:/palmlink/pylog",filetop="",code='utf-8'):
 def randomBytes(size):
     return "".join(random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/!@#$%^&*()',size))
 
+def https(url_str,method='GET',data=None):
+    import httplib, ssl, socket
+    from urlparse import urlparse
+
+    url=urlparse(url_str)
+    conn = httplib.HTTPSConnection(url.hostname)
+    print url.path +"?"+ url.query
+    sock = socket.create_connection((conn.host,conn.port), conn.timeout)
+    conn.sock = ssl.wrap_socket(sock, conn.key_file, conn.cert_file)
+    conn.request(method, url.path +"?"+url.query,data)
+    response = conn.getresponse()
+    data = response.read()
+    data=data.decode("utf8")
+    rsarr=[response.status,response.reason,data]
+    conn.close()
+    return rsarr
+
+
 def test():
 #    u=HttpClient()
 #    s="锟叫癸拷"
@@ -164,7 +182,6 @@ def test():
 #    print rs
 #    print readfile("d:\\temp\\test\\SMSOUT00000000004125.txt")
     console_log('好的',path="/data/temp/log.txt")
-
 
 if __name__=="__main__":
     test()
