@@ -138,14 +138,14 @@ def __testRest():
 
     # print key
     print rs
-    print objCBC.decode("M01BtXR0nzpi6ApRcZrl40D/oRJkTqVY8+KvuCq4AlSSh01A6hTRiXK+5F+JCQXKFBLvkzzb4Ps=",key,iv)
+    print objCBC.decode("yc1SrxTCRqp4a4BtR/aqUA==",key,iv)
     # print text
     # print objCBC.decode(rs,key,iv)
 
 if __name__=="__main__":
-    __testTRIPLEDES()
-    __testDES()
-    # __testRest()
+    # __testTRIPLEDES()
+    # __testDES()
+    __testRest()
 
 
 
