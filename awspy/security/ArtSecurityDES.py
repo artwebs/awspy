@@ -138,7 +138,7 @@ def __testRest():
 
     # print key
     print rs
-    print objCBC.decode("yc1SrxTCRqp4a4BtR/aqUA==",key,iv)
+    print objCBC.decode("QsbyxfuVw1+ykVtpOnAyYw==",key,iv)
     # print text
     # print objCBC.decode(rs,key,iv)
 

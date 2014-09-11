@@ -4,7 +4,7 @@ __author__ = 'artwebs'
 import string
 import struct
 import random
-from awspy.utils.Utils import *
+from awspy.Utils.Utils import *
 
 class Security(object):
      keysize=None
