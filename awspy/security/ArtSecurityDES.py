@@ -143,9 +143,9 @@ def __testRest():
     # print objCBC.decode(rs,key,iv)
 
 if __name__=="__main__":
-    # __testTRIPLEDES()
+    __testTRIPLEDES()
     # __testDES()
-    __testRest()
+    # __testRest()
 
 
 
