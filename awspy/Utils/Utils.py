@@ -167,6 +167,25 @@ def https(url_str,method='GET',data=None):
     conn.close()
     return rsarr
 
+def bytes2int(buf,asc=True ):
+    r=0;
+    if asc :
+        for i in range(len(buf)-1,-1,-1):
+            r<<=8
+            r|=(buf[i]&0x000000ff)
+    else:
+        for i in range(len(buf)):
+            r<<=8
+            r|=(buf[i]&0x000000ff)
+    return r
+
+def byte2str(buf,trim=True):
+    if trim :
+        return ("".join(map(chr, buf))).strip(chr(0))
+    else:
+        return "".join(map(chr, buf))
+
+
 
 def test():
 #    u=HttpClient()
