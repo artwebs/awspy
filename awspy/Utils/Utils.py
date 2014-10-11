@@ -185,6 +185,22 @@ def byte2str(buf,trim=True):
     else:
         return "".join(map(chr, buf))
 
+def int2bytes(num,asc=True):
+    buf=bytearray(b'\x00\x00\x00\x00')
+    if asc :
+        for i in range(len(buf)-1,-1,-1):
+            buf[i]=(num&0x000000ff)
+            num=(num>>8)
+    else:
+        for i in range(len(buf)):
+            buf[i]=(num&0x000000ff)
+            num=num>>8
+    return buf
+
+def str2byte(str):
+    pass
+
+
 
 
 def test():
@@ -200,8 +216,13 @@ def test():
 #    print rs[2]
 #    print rs
 #    print readfile("d:\\temp\\test\\SMSOUT00000000004125.txt")
-    console_log('好的',path="/data/temp/log.txt")
+#     console_log('好的',path="/data/temp/log.txt")
 
+    rs=int2bytes(147,False)
+    print str(rs[0])
+    print str(rs[1])
+    print str(rs[2])
+    print str(rs[3])
 if __name__=="__main__":
     test()
 
