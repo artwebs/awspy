@@ -90,8 +90,6 @@ class RedisModel(DbModel):
             row.delete()
         return True
 
-
-
 if __name__=="__main__":
     class Person(models.Model):
         name = models.Attribute(required=True)
