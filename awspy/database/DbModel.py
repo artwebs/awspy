@@ -22,7 +22,7 @@ class DbModel(Db):
 
     def __init__(self,connstr=None,host=None,user=None,passwd=None,db=None,port=None):
         Db.__init__(self,connstr,host,user,passwd,db,port)
-        
+
     def getSelectResult(self,fvs=None,where=None,tableName=None):
         fvpart="*";
         tbname="";
