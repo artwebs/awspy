@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 __author__ = 'liuhongbin'
 from awspy.database.redisco import *
 from awspy.database.redisco import models
@@ -19,6 +19,8 @@ class RedisModel(DbModel):
         filter=None
         order=None
         limit=None
+        page=None
+        pagesize=None
         for key in kwargs:
             if key=='filter':
                 filter=kwargs[key]
@@ -26,6 +28,12 @@ class RedisModel(DbModel):
                 order=kwargs[key]
             elif key=='limit':
                 limit=kwargs[key]
+            elif key=='page':
+                page=int(kwargs[key])
+            elif key=='pagesize':
+                pagesize=int(kwargs[key])
+        if limit is None and page is not None and pagesize is not None:
+            limit=[pagesize,(page-1)*pagesize]
         print filter,order,limit
         if filter is not None:
             if set(["id"]).issubset(filter):
@@ -49,19 +57,25 @@ class RedisModel(DbModel):
     def select(self,table,*args,**kwargs):
         rs_list=[]
         obj_list=self.select_object_list(table,**kwargs)
-        print obj_list
         for row in obj_list:
             if row is None:
                 continue
             s_row={'id':row.id}
-            for filed in args:
-                s_row[filed]=str(getattr(row,filed))
+            if len(args)>0:
+                for filed in args:
+                    s_row[filed]=str(getattr(row,filed))
+            else:
+                attrs = row.attributes.values() + row.lists.values() \
+                + row.references.values()
+                for att in attrs:
+                   s_row[att.name]=str(getattr(row,att.name))
             rs_list.append(s_row)
         return rs_list
 
     #kwargs 插入字段
     def instert(self,table,**kwargs):
-        return table.objects.create(**kwargs)
+        obj=table(**kwargs)
+        return obj.save()
 
     #kwargs 修改字段及值及同select的filter
     def update(self,table,**kwargs):
@@ -85,12 +99,13 @@ class RedisModel(DbModel):
         for key in kwargs:
             if key=='filter':
                 filter=kwargs[key]
-        obj_list=self.select_object_list(table,**filter)
+        if filter is not None:
+            obj_list=self.select_object_list(table,**filter)
+        else:
+            obj_list=self.select_object_list(table)
         for row in obj_list:
             row.delete()
         return True
-
-
 
 if __name__=="__main__":
     class Person(models.Model):
@@ -98,14 +113,15 @@ if __name__=="__main__":
         created_at = models.DateTimeField(auto_now_add=True)
         fave_colors = models.ListField(str)
     db=RedisModel(host='localhost', port=6379,db=0)
-    #print db.instert(Person,name='Conchita4')
+    print db.instert(Person,name='Conchita4')
+    print db.select(Person,'name','created_at','fave_colors')
     #print db.select(Person,'name','created_at','fave_colors',filter={"name":'Conchita4'},order=['-created_at'],limit=[2,0])
     #print db.select(Person,'name','created_at','fave_colors',filter={"id":"21"})
     #print db.select(Person,'name','created_at','fave_colors',filter={"id":"21,22"})
 
-    db.update(Person,name='Conchita0',filter={"id":"21,22"})
-    print db.select(Person,'name','created_at','fave_colors',filter={"id":"21,22"})
-
-    db.delete(Person,name='Conchita0',filter={"id":"21,22"})
-    print db.select(Person,'name','created_at','fave_colors',filter={"id":"21,22"})
+    # db.update(Person,name='Conchita0',filter={"id":"21,22"})
+    # print db.select(Person,'name','created_at','fave_colors',filter={"id":"21,22"})
+    #
+    # db.delete(Person,name='Conchita0',filter={"id":"21,22"})
+    # print db.select(Person,'name','created_at','fave_colors',filter={"id":"21,22"})
 
