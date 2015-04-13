@@ -41,7 +41,6 @@ class RedisModel(DbModel):
             obj_list=obj_list.order(*order)
         if limit is not None:
             obj_list=obj_list.limit(*limit)
-
         return obj_list
 
     #talbe 表名
@@ -115,18 +114,4 @@ if __name__=="__main__":
 
     db.delete(Person,name='Conchita0',filter={"id":"21,22"})
     print db.select(Person,'name','created_at','fave_colors',filter={"id":"21,22"})
-    # db.delete(Person,name='Conchita')
-    # db.update(Person,21,name='Conchita5')
-    # db.getCursor()
-    # person = Person(name="Conchita")
-    # print person.is_valid()
-    # person.delete()
-    # person.save()
-    # conchita = Person.objects.filter(name='Conchita')
-    # print(conchita[0].id)
 
-    # Person.objects.create(name="Conchita")
-    # for person in Person.objects.all():
-    #         person.delete()
-
-    # s=TestObject(name="1",c=2)
