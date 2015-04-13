@@ -63,7 +63,7 @@ class RedisModel(DbModel):
     def instert(self,table,**kwargs):
         return table.objects.create(**kwargs)
 
-    #kwargs 修改字段及值及filter
+    #kwargs 修改字段及值及同select的filter
     def update(self,table,**kwargs):
         filter=None
         field_dic={}
@@ -79,7 +79,7 @@ class RedisModel(DbModel):
             row.save()
         return True
 
-    #kwargs filter
+    #kwargs 同select的filter
     def delete(self,table,**kwargs):
         filter=None
         for key in kwargs:
@@ -91,18 +91,12 @@ class RedisModel(DbModel):
         return True
 
 
-class Person(models.Model):
-    name = models.Attribute(required=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    fave_colors = models.ListField(str)
-
-class TestObject(object):
-    def __init__(self,**kwargs):
-        for name in kwargs:
-            print name,kwargs[name]
-
 
 if __name__=="__main__":
+    class Person(models.Model):
+        name = models.Attribute(required=True)
+        created_at = models.DateTimeField(auto_now_add=True)
+        fave_colors = models.ListField(str)
     db=RedisModel(host='localhost', port=6379,db=0)
     #print db.instert(Person,name='Conchita4')
     #print db.select(Person,'name','created_at','fave_colors',filter={"name":'Conchita4'},order=['-created_at'],limit=[2,0])
