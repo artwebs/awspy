@@ -73,7 +73,7 @@ class RedisModel(DbModel):
         return rs_list
 
     #kwargs 插入字段
-    def instert(self,table,**kwargs):
+    def insert(self,table,**kwargs):
         obj=table(**kwargs)
         return obj.save()
 
@@ -113,7 +113,7 @@ if __name__=="__main__":
         created_at = models.DateTimeField(auto_now_add=True)
         fave_colors = models.ListField(str)
     db=RedisModel(host='localhost', port=6379,db=0)
-    print db.instert(Person,name='Conchita4')
+    print db.insert(Person,name='Conchita4')
     print db.select(Person,'name','created_at','fave_colors')
     #print db.select(Person,'name','created_at','fave_colors',filter={"name":'Conchita4'},order=['-created_at'],limit=[2,0])
     #print db.select(Person,'name','created_at','fave_colors',filter={"id":"21"})
