@@ -3,6 +3,7 @@ __author__ = 'liuhongbin'
 from awspy.database.redisco import *
 from awspy.database.redisco import models
 from awspy.database.DbModel import DbModel
+import json
 class RedisModel(DbModel):
     def __init__(self,tablename=None):
         if tablename is not None: self.__tablename=tablename
@@ -32,6 +33,11 @@ class RedisModel(DbModel):
                 page=int(kwargs[key])
             elif key=='pagesize':
                 pagesize=int(kwargs[key])
+            else:
+                if filter is None:
+                    filter={}
+                if table.exists(key):
+                    filter[key]=kwargs[key]
         if limit is None and page is not None and pagesize is not None:
             limit=[pagesize,(page-1)*pagesize]
         print filter,order,limit
@@ -41,7 +47,7 @@ class RedisModel(DbModel):
                 for id in filter["id"].split(','):
                     obj_list.append(table.objects.get_by_id(id))
             else:
-                obj_list=table.objects.filter(**filter)
+                    obj_list=table.objects.filter(**filter)
         else:
             obj_list=table.objects.all()
 
@@ -74,7 +80,13 @@ class RedisModel(DbModel):
 
     #kwargs 插入字段
     def insert(self,table,**kwargs):
-        obj=table(**kwargs)
+        para={}
+        for key in kwargs:
+            if table.exists(key):
+                para[key]=kwargs[key]
+            else:
+                return "不存在"+str(key)
+        obj=table(**para)
         return obj.save()
 
     #kwargs 修改字段及值及同select的filter
