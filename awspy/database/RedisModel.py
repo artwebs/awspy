@@ -80,13 +80,13 @@ class RedisModel(DbModel):
 
     #kwargs 插入字段
     def insert(self,table,**kwargs):
-        para={}
-        for key in kwargs:
-            if table.exists(key):
-                para[key]=kwargs[key]
-            else:
-                return "不存在"+str(key)
-        obj=table(**para)
+        # para={}
+        # for key in kwargs:
+        #     if table.exists(key):
+        #         para[key]=kwargs[key]
+        #     else:
+        #         return "不存在"+str(key)
+        obj=table(**kwargs)
         return obj.save()
 
     #kwargs 修改字段及值及同select的filter
