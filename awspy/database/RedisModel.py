@@ -71,10 +71,8 @@ class RedisModel(DbModel):
                 for filed in args:
                     s_row[filed]=str(getattr(row,filed))
             else:
-                attrs = row.attributes.values() + row.lists.values() \
-                + row.references.values()
-                for att in attrs:
-                   s_row[att.name]=str(getattr(row,att.name))
+                for filed in row.fields:
+                   s_row[filed.name]=str(getattr(row,filed.name))
             rs_list.append(s_row)
         return rs_list
 
@@ -86,7 +84,10 @@ class RedisModel(DbModel):
         #         para[key]=kwargs[key]
         #     else:
         #         return "不存在"+str(key)
-        obj=table(**kwargs)
+        obj=table()
+        for field in obj.fields:
+            if kwargs.has_key(field.name):
+                setattr(obj,field.name,field.typecast_for_read(kwargs[field.name]))
         return obj.save()
 
     #kwargs 修改字段及值及同select的filter
@@ -99,10 +100,15 @@ class RedisModel(DbModel):
             else:
                 field_dic[key]=kwargs[key]
         obj_list=self.select_object_list(table,**filter)
+        print field_dic
         for row in obj_list:
-            for field in field_dic:
-                setattr(row, field, field_dic[field])
-            row.save()
+            for field in row.fields:
+                if field_dic.has_key(field.name):
+                    setattr(row,field.name,field.typecast_for_read(field_dic[field.name]))
+            if row.is_valid():
+                row.save()
+            else:
+                return row._errors
         return True
 
     #kwargs 同select的filter
