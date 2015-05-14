@@ -17,7 +17,7 @@ setup(name = 'awspy',
 	              'awspy.zip',
 	              ],
 #	  packages = find_packages('src'),
-	  version = '1.0.5',
+	  version = '1.0.6',
 	  description = 'the product of artwebs',
 	  author='artwebs',   
      ) 
